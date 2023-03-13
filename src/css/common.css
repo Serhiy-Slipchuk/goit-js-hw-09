@@ -26,11 +26,11 @@ img {
   font-size: 36px;
   margin-right: 50px;
   padding: 15px;
-  background-color: gray;
+  background-color: #1bbc9b;
   border-radius: 15px;
 }
 
 .value {
   font-weight: 700;
-  color: blue;
+  color: white;
 }
