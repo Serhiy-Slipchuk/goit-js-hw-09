@@ -1,5 +1,6 @@
 import flatpickr from 'flatpickr';
 import "flatpickr/dist/flatpickr.min.css";
+import "flatpickr/dist/themes/material_green.css";
 import Notiflix from 'notiflix';
 
 const buttonStartCountEl = document.querySelector('button[data-start]');
@@ -25,7 +26,8 @@ const optionsFlatpickr = {
         console.log(selectedDates[0]);
         selectedTime = selectedDates[0].getTime();
         if (selectedTime <= currentTime) {
-            Notiflix.Notify.failure('Введіть дату у майбутньому часі');
+            Notiflix.Notify.failure('Введіть дату у майбутньому часі',
+                { clickToClose: true, position: 'center-top'});
         } else {
             buttonStartCountEl.disabled = false;
             buttonStartCountEl.addEventListener('click', handlerButtonClick);
@@ -38,7 +40,8 @@ flatpickr('#datetime-picker', optionsFlatpickr);
 
 function handlerButtonClick() {
     if (isTimerRun) {
-        Notiflix.Notify.failure('Таймер вже запущений. Дочекайтеся закінчення відліку або оновіть сторінку для введення іншої дати');
+        Notiflix.Notify.failure('Таймер вже запущений. Дочекайтеся закінчення відліку або оновіть сторінку для введення іншої дати',
+        { clickToClose: true, position: 'center-top'});
         return;
     }
     isTimerRun = true;
