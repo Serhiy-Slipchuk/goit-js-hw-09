@@ -1,6 +1,7 @@
 import Notiflix from "notiflix";
 
 const formEl = document.querySelector('.form');
+const buttonEl = document.querySelector('button[type="submit"]');
 
 const incomingData = {
   delay: 0,
@@ -23,6 +24,7 @@ function handlerClick(event) {
   if (event.target.nodeName !== 'BUTTON') {
     return;
   };
+  buttonEl.disabled = true;
   displayPromises(incomingData);
 }
 
@@ -42,12 +44,15 @@ function displayPromises({ delay, step, amount }) {
   setTimeout(() => {
     for (let i = 1; i <= amount; i++) {
       createPromise(i, delay)
-        .then(resolve => Notiflix.Notify.success(resolve))
-        .catch(reject => Notiflix.Notify.failure(reject));
+        .then(resolve => Notiflix.Notify.success(resolve, { timeout: 10000 }))
+        .catch(reject => Notiflix.Notify.failure(reject, { timeout: 10000 } ));
       delay = delay + step;
     };
   }, delay);
-  
+
+  setTimeout(() => {
+    buttonEl.disabled = false;
+  }, delay + amount * step)
 }
 
 function createPromise(position, delay) {
